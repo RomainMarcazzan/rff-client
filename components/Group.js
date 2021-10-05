@@ -5,9 +5,9 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 import { getTeamsData } from "../api/teams";
-
 const Group = ({ title, groupId }) => {
   const [teamsData, setTeamsData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -15,26 +15,35 @@ const Group = ({ title, groupId }) => {
   const getTeamsByGroupHandler = async (groupId) => {
     const teams = await getTeamsData(groupId);
     setTeamsData(teams);
-    setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    getTeamsByGroupHandler(groupId);
+  }, []);
   return (
-    <View>
-      <TouchableOpacity onPress={() => getTeamsByGroupHandler(groupId)}>
+    <TouchableOpacity onPress={() => {}}>
+      <View style={styles.container}>
         <Text>{title}</Text>
-      </TouchableOpacity>
-      {teamsData ? (
-        isOpen ? (
-          <View>
-            {teamsData.map((team) => (
-              <Text key={team.id}>{team.title}</Text>
-            ))}
-          </View>
-        ) : null
-      ) : null}
-    </View>
+        {teamsData.map((team) => (
+          <Image
+            key={team.id}
+            style={styles.image}
+            source={{
+              uri: `http://192.168.1.11:5000/images/${team.logo}.jpg`,
+            }}
+          />
+        ))}
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export default Group;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: { flexDirection: "row" },
+  image: {
+    width: 20,
+    height: 20,
+  },
+});

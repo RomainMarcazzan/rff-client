@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    // alignItems: "center",
     marginTop: Platform.OS === "android" ? 50 : 20,
   },
 });
