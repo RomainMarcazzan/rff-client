@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { getGroupsData } from "../api/groups";
-import Group from "../components/Group";
+import Group from "./GroupMenu";
 const Division = ({ title, divisionId }) => {
   const [groupsData, setGroupsData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +17,7 @@ const Division = ({ title, divisionId }) => {
     setGroupsData(groups);
     setIsOpen(!isOpen);
   };
+
   return (
     <View>
       <TouchableOpacity onPress={() => getGroupsByDivisionHandler(divisionId)}>
@@ -31,14 +32,7 @@ const Division = ({ title, divisionId }) => {
               <Group title={item.title} groupId={item.id} />
             )}
           ></FlatList>
-        ) : //   <View>
-        //     {groupsData.map((group) => (
-        //       <TouchableOpacity key={group.id}>
-        //         <Text>{group.title}</Text>
-        //       </TouchableOpacity>
-        //     ))}
-        //   </View>
-        null
+        ) : null
       ) : null}
     </View>
   );

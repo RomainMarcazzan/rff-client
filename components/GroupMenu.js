@@ -7,24 +7,33 @@ import {
   View,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { getTeamsData } from "../api/teams";
-const Group = ({ title, groupId }) => {
-  const [teamsData, setTeamsData] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+
+const GroupMenu = ({ title, groupId }) => {
+  const [teams, setTeams] = useState([]);
+  const navigation = useNavigation();
 
   const getTeamsByGroupHandler = async (groupId) => {
-    const teams = await getTeamsData(groupId);
-    setTeamsData(teams);
+    const teamsData = await getTeamsData(groupId);
+    setTeams(teamsData);
   };
 
   useEffect(() => {
     getTeamsByGroupHandler(groupId);
   }, []);
+
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Group", {
+          teams,
+        });
+      }}
+    >
       <View style={styles.container}>
         <Text>{title}</Text>
-        {teamsData.map((team) => (
+        {teams.map((team) => (
           <Image
             key={team.id}
             style={styles.image}
@@ -38,7 +47,7 @@ const Group = ({ title, groupId }) => {
   );
 };
 
-export default Group;
+export default GroupMenu;
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row" },

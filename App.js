@@ -1,54 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import axios from "axios";
-import { getDivisionData } from "./api/divisions";
-import Division from "./components/Division";
-export default function App() {
-  // const getDataUsingAsyncAwaitGetCall = async () => {
-  //   try {
-  //     const response = await axios.get("http://192.168.1.1:5000/api/divisions");
-  //     alert(JSON.stringify(response.data));
-  //   } catch (error) {
-  //     // handle error
-  //     alert(error.message);
-  //   }
-  // };
-  const [divisionData, setDivisionData] = useState([]);
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./screens/HomeScreen";
+import GroupScreen from "./screens/GroupScreen";
+import TeamScreen from "./screens/TeamScreen";
 
-  useEffect(() => {
-    const fetchDivisionData = async () => {
-      const divisions = await getDivisionData();
-      setDivisionData(divisions);
-    };
-    fetchDivisionData();
-  }, []);
+export default function App() {
+  const Stack = createNativeStackNavigator();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={divisionData}
-        keyExtractor={(item) => item.title.toString()}
-        renderItem={({ item }) => (
-          <Division title={item.title} divisionId={item.id} />
-        )}
-      ></FlatList>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Group" component={GroupScreen} />
+        <Stack.Screen name="Team" component={TeamScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    // alignItems: "center",
-    marginTop: Platform.OS === "android" ? 50 : 20,
-  },
-});
