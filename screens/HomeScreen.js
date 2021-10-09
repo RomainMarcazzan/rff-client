@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import { getDivisionData } from "../api/divisions";
 import Division from "../components/Division";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function HomeScreen() {
   const [divisionData, setDivisionData] = useState([]);
 
