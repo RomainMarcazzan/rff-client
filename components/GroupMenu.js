@@ -38,7 +38,7 @@ const GroupMenu = ({ title, groupId }) => {
             key={team.id}
             style={styles.image}
             source={{
-              uri: `http://192.168.1.11:5000/images/${team.logo}.jpg`,
+              uri: `http://192.168.43.177:5000/images/${team.logo}.jpg`,
             }}
           />
         ))}

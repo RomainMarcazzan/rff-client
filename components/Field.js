@@ -1,25 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import field from "../assets/field.png";
-import FieldPlayer from "./FieldPlayer";
+import FieldPlayersByRow from "./FieldPlayersByRow";
+import { useSelector } from "react-redux";
 
 const Field = () => {
-  const players = {
-    PL: [null, null, null],
-    SL: [null, null],
-    TL: [null, null, null],
-    DEM: [null, null],
-    CEN: [null, null],
-    AIL: [null, null],
-    ARR: [null],
-  };
+  const playersField = useSelector(
+    (state) => state.playersField.structureField
+  );
+  const keys = ["PL", "SL", "TL", "DEM", "CEN", "AIL", "ARR"];
+
   return (
     <ImageBackground style={styles.field} resizeMode="stretch" source={field}>
-      {Object.keys(players).map((position, indexRow) => (
-        <FieldPlayer
+      {keys.map((positionRow, indexRow) => (
+        <FieldPlayersByRow
           key={indexRow}
-          players={players}
-          position={position}
+          positionRow={positionRow}
           indexRow={indexRow}
         />
       ))}
@@ -32,7 +28,7 @@ export default Field;
 const styles = StyleSheet.create({
   field: {
     width: "100%",
-    // height: "90%",
+    height: "100%",
     backgroundColor: "green",
     alignItems: "center",
     justifyContent: "space-evenly",

@@ -3,7 +3,7 @@ import axios from "axios";
 export const getTeamsData = async (groupId) => {
   try {
     const response = await axios.get(
-      `http://192.168.1.11:5000/api/team/group/${groupId}`
+      `http://192.168.43.177:5000/api/team/group/${groupId}`
     );
     return response.data;
   } catch (error) {
@@ -14,7 +14,7 @@ export const getTeamsData = async (groupId) => {
 export const getTeamData = async (teamId) => {
   try {
     const response = await axios.get(
-      `http://192.168.1.11:5000/api/team/${teamId}`
+      `http://192.168.43.177:5000/api/team/${teamId}`
     );
     return response.data;
   } catch (error) {

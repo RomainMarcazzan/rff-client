@@ -23,16 +23,14 @@ const Division = ({ title, divisionId }) => {
       <TouchableOpacity onPress={() => getGroupsByDivisionHandler(divisionId)}>
         <Text>{title}</Text>
       </TouchableOpacity>
-      {groupsData ? (
-        isOpen ? (
-          <FlatList
-            data={groupsData}
-            keyExtractor={(item) => item.title.toString()}
-            renderItem={({ item }) => (
-              <Group title={item.title} groupId={item.id} />
-            )}
-          ></FlatList>
-        ) : null
+      {isOpen ? (
+        <FlatList
+          data={groupsData}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <Group title={item.title} groupId={item.id} />
+          )}
+        ></FlatList>
       ) : null}
     </View>
   );

@@ -10,6 +10,7 @@ export default function HomeScreen() {
     const divisions = await getDivisionData();
     setDivisionData(divisions);
   };
+
   useEffect(() => {
     fetchDivisionData();
   }, []);
@@ -18,7 +19,7 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={divisionData}
-        keyExtractor={(item) => item.title.toString()}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Division title={item.title} divisionId={item.id} />
         )}
