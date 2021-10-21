@@ -34,6 +34,10 @@ const initialState = {
     row: "",
     positionNumSelected: "",
   },
+  gradeGiven: {
+    grade: 10,
+  },
+  isReset: false,
 };
 
 export const playersFieldSlice = createSlice({
@@ -65,9 +69,13 @@ export const playersFieldSlice = createSlice({
       });
       state.structureField = newStructureField;
     },
+    resetField(state) {
+      Object.assign(state.structureField, initialState.structureField);
+      state.isReset = !state.isReset;
+    },
   },
 });
 
-export const { getPositionSelected, addPlayerToStructure } =
+export const { getPositionSelected, addPlayerToStructure, resetField } =
   playersFieldSlice.actions;
 export default playersFieldSlice.reducer;

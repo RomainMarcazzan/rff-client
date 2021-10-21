@@ -5,11 +5,8 @@ import FieldPlayersByRow from "./FieldPlayersByRow";
 import { useSelector } from "react-redux";
 
 const Field = () => {
-  const playersField = useSelector(
-    (state) => state.playersField.structureField
-  );
+  const { structureField } = useSelector((state) => state.playersField);
   const keys = ["PL", "SL", "TL", "DEM", "CEN", "AIL", "ARR"];
-
   return (
     <ImageBackground style={styles.field} resizeMode="stretch" source={field}>
       {keys.map((positionRow, indexRow) => (
